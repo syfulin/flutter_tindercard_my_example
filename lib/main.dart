@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tindercard/flutter_tindercard.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,14 +32,47 @@ class Tinderswiper extends StatefulWidget {
   _TinderswiperState createState() => _TinderswiperState();
 }
 
-class _TinderswiperState extends State<Tinderswiper> {
+class _TinderswiperState extends State<Tinderswiper>
+    with TickerProviderStateMixin {
+  List<String> galleryImages = [
+    'assets/images/k1.png',
+    'assets/images/k2.png',
+    'assets/images/k3.png',
+    'assets/images/k4.png',
+    'assets/images/k5.png',
+    'assets/images/k6.png'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Tinder swiper'),
       ),
-      body: Center(),
+      body: Center(
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.6,
+          child: TinderSwapCard(
+            orientation: AmassOrientation.TOP,
+            totalNum: galleryImages.length,
+            stackNum: 5,
+            maxWidth: MediaQuery.of(context).size.width * 0.9,
+            maxHeight: MediaQuery.of(context).size.height * 0.9,
+            minWidth: MediaQuery.of(context).size.width * 0.8,
+            minHeight: MediaQuery.of(context).size.height * 0.8,
+            cardBuilder: (context, index) => Card(
+                elevation: 0,
+                color: Colors.transparent,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: Image.asset(
+                    '${galleryImages[index]}',
+                    fit: BoxFit.fill,
+                  ),
+                )),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -32,8 +32,10 @@ class Tinderswiper extends StatefulWidget {
   _TinderswiperState createState() => _TinderswiperState();
 }
 
+// Узнать, зачем здесь mixin TickerProviderStateMixin
 class _TinderswiperState extends State<Tinderswiper>
     with TickerProviderStateMixin {
+  // Список картинок
   List<String> galleryImages = [
     'assets/images/k1.png',
     'assets/images/k2.png',
@@ -54,22 +56,22 @@ class _TinderswiperState extends State<Tinderswiper>
           height: MediaQuery.of(context).size.height * 0.6,
           child: TinderSwapCard(
             orientation: AmassOrientation.TOP,
-            totalNum: galleryImages.length,
-            stackNum: 5,
+            totalNum: galleryImages.length, // количество картинок
+            stackNum: 5, // Номер начальной картинки ?
             maxWidth: MediaQuery.of(context).size.width * 0.9,
             maxHeight: MediaQuery.of(context).size.height * 0.9,
             minWidth: MediaQuery.of(context).size.width * 0.8,
             minHeight: MediaQuery.of(context).size.height * 0.8,
             cardBuilder: (context, index) => Card(
-                elevation: 0,
-                color: Colors.transparent,
+                elevation: 0, // Убрать тень, что бы карточка была прозрачной
+                color: Colors.transparent, // Прозрачный цвет карточки
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30.0),
                   child: Image.asset(
                     '${galleryImages[index]}',
                     fit: BoxFit.fill,
-                  ),
-                )),
+                  ), // Внутри карточки уже сама картинка
+                )), // ClipRRect - Штука для закругления её child'a
           ),
         ),
       ),
